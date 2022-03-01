@@ -72,7 +72,7 @@ class LoginController extends Controller
             Auth::logout();
             return redirect()->back();
         } else {
-            return redirect()->route('/log/agames/vendor')
+            return redirect()->back()
                 ->with('error', 'Email-Address And Password Are Wrong.');
         }
     }
