@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
+
 class VendorHomeController extends Controller
 {
     public function userslist()
@@ -18,10 +19,11 @@ class VendorHomeController extends Controller
             return (array)$value;
         }, $vendors['data']);
         for ($i = 0; $i < count($vendors['data']); $i++) {
-            if (Cache::has('user-is-online-' . $vendors['data'][$i]['id']))
+            if ($vendors['data'][$i]['last_seen'] > now()) {
                 $vendors['data'][$i]['status'] = 'Online';
-            else
+            } else {
                 $vendors['data'][$i]['status'] = 'Offline';
+            }
         }
         $id =  DB::table('users')->first();
         $vendors['sequence'] = $id->id + 1;
@@ -98,7 +100,7 @@ class VendorHomeController extends Controller
                 $name = DB::table('users')->where('id', $id)->pluck('name')[0];
                 DB::table($vendorid . '_accounthistory')->insert([
                     'account' => $username, 'amount' => $data['balance'], 'description' => 'deposit', 'name' => $name,
-                    'frombalance' => 0, 'bounce' => $bounceamount, 'tobalance' => $data['balance'], 'created_at' => now(), 'updated_at' => now(),'color'=>4
+                    'frombalance' => 0, 'bounce' => $bounceamount, 'tobalance' => $data['balance'], 'created_at' => now(), 'updated_at' => now(), 'color' => 4
                 ]);
                 $todayreport = DB::table($vendorid . '_accountreport')->whereDate('created_at', '=', date('Y-m-d', time()))->get()->toArray();
                 $todayreport = array_map(function ($value) {
@@ -177,7 +179,7 @@ class VendorHomeController extends Controller
                 break;
             case 'delete':
                 DB::table('users')->where('id', $sequence)->update([
-                    'close' => true,'dispute'=>true
+                    'close' => true, 'dispute' => true
                 ]);
 
                 $message['err'] = 'User account added into disputes';
@@ -336,7 +338,7 @@ class VendorHomeController extends Controller
                 ///only use from deposit redeem and revert and games of user
                 DB::table($vendorid . '_accounthistory')->insert([
                     'account' => $username, 'amount' => $revertamount, 'bounce' => -$lastbounce, 'description' => 'revert', 'name' => $name,
-                    'frombalance' => $previous, 'tobalance' => $amount, 'created_at' => now(), 'updated_at' => now(),'color'=>4
+                    'frombalance' => $previous, 'tobalance' => $amount, 'created_at' => now(), 'updated_at' => now(), 'color' => 4
                 ]);
 
                 $message['err'] = 'User last recharge reverted back';
@@ -368,7 +370,7 @@ class VendorHomeController extends Controller
                     ///only use from deposit redeem and revert and games of user
                     DB::table($vendorid . '_accounthistory')->insert([
                         'account' => $username, 'amount' => $redeemamount, 'description' => 'bouncereturn', 'name' => $name,
-                        'frombalance' => $bounceback, 'bounce' => $redeemamount, 'tobalance' => $bouncebackafter, 'created_at' => now(), 'updated_at' => now(),'color'=>5
+                        'frombalance' => $bounceback, 'bounce' => $redeemamount, 'tobalance' => $bouncebackafter, 'created_at' => now(), 'updated_at' => now(), 'color' => 5
                     ]);
                     $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
                     if ($bounceback > 0) {
@@ -421,7 +423,7 @@ class VendorHomeController extends Controller
                 ///only use from deposit redeem and revert and games of user
                 DB::table($vendorid . '_accounthistory')->insert([
                     'account' => $username, 'amount' => $redeemamount, 'description' => 'redeem', 'name' => $name,
-                    'frombalance' => $previous, 'bounce' => '', 'tobalance' => $reward, 'created_at' => now(), 'updated_at' => now(),'color'=>6
+                    'frombalance' => $previous, 'bounce' => '', 'tobalance' => $reward, 'created_at' => now(), 'updated_at' => now(), 'color' => 6
                 ]);
                 $message['err'] = 'User Withdrawl Redeem';
                 return response($message['err']);
