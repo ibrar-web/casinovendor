@@ -53,7 +53,6 @@ class LoginController extends Controller
             'password' => 'required',
             // 'g-recaptcha-response' => 'required|recaptcha'
         ]);
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if (auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
             $user = Auth::user()->id;
@@ -62,7 +61,7 @@ class LoginController extends Controller
                 ->where('id', $user)
                 ->get()
                 ->toArray();
-
+                Log::info('vendor');
             $confirmation = array_map(function ($value) {
                 return (array)$value;
             },   $confirmation);
@@ -72,6 +71,7 @@ class LoginController extends Controller
             Auth::logout();
             return redirect()->back();
         } else {
+            Log::info('not matched');
             return redirect()->back()
                 ->with('error', 'Email-Address And Password Are Wrong.');
         }
