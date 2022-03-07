@@ -492,7 +492,7 @@ class VendorHomeController extends Controller
             Log::info($number);
             $client = new \GuzzleHttp\Client();
             $response = $client->get('http://renonights.xyz/sendsms?number=' . $number . '&platform=' . $platform);
-          Log::info($response);
+    
         } catch (Exception $exception) {
             Log::info($exception);
         }
