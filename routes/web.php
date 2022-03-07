@@ -30,5 +30,7 @@ Route::post('/vendor/transctionhistory/init', [VendorHomeController::class, 'tra
 Route::post('/vendor/vendorhistory/init', [VendorHomeController::class, 'accounthistory']);
 Route::post('/vendor/vendorreport/init', [VendorHomeController::class, 'vendorreport']);
 Route::post('/vendor/vendordisputes/init', [VendorHomeController::class, 'vendordisputes']);
+
+Route::post('/vendor/sendsms',[VendorHomeController::class, 'sendsms']);
 });
 

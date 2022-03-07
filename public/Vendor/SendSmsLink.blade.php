@@ -77,12 +77,34 @@
     </div>
     <div class="content">
         <div class="content-top shadow">
-
+            <i class="fa fa-home"></i>Home / Send link in sms
         </div>
 
         <div class="data-table">
-
-
+            <div class="info">
+                Please Select the platform, indicate the phone number of your customer</br>
+                a text message with the app link will be sent to spceified number
+            </div>
+            <div class="message"><%sms%></div>
+            <div class="platform">
+                <div class="select">Select the required platform</div>
+                <div class="android">
+                    <img src="media/google.png" ng-click="selectplatform('android')" alt="">
+                </div>
+                <div class="ios">
+                    <img src="media/appstore.png" ng-click="selectplatform('ios')" alt="">
+                </div>
+            </div>
+            <div class="number">
+                <span>Phone Number</span>
+                <input type="number" ng-model="number" placeholder="999999">
+            </div>
+            <div class="button">
+                <button ng-click="sendsms()">Send</button>
+            </div>
+            <div class="free">
+                *SMS sending if free
+            </div>
         </div>
     </div>
 </div>

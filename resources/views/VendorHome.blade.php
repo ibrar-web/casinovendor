@@ -66,10 +66,7 @@
     <script src="<?= asset('Vendorjs/HowToDownload.js') ?>"></script>
     <script src="<?= asset('Vendorjs/AccountDisputes.js') ?>"></script>
     <script src="<?= asset('Vendorjs/SendSmsLink.js') ?>"></script>
-
     <script src="<?= asset('Vendorjs/testview.js') ?>"></script>
-
-
 </body>
 
 </html>

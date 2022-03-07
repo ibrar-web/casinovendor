@@ -18,4 +18,23 @@ app.controller("SendSmsLink", function($scope, $filter, $http, $interval) {
         }
 
     }
+    $scope.platform='android';
+    $scope.sms='';
+    $scope.number='';
+    $scope.selectplatform=function(value){
+        $scope.platform=value
+    }
+    $scope.sendsms=function(){
+        var PipelineData = {
+            number:$scope.number,
+            platform:$scope.platform
+        };
+        $http.post("./vendor/sendsms", JSON.stringify(PipelineData)).then(
+            function(response) {
+                $scope.sms=response.data;
+            },
+            function(response) {
+            }
+        );
+    }
 });

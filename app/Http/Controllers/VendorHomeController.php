@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Exception;
 
 class VendorHomeController extends Controller
 {
@@ -115,14 +117,14 @@ class VendorHomeController extends Controller
                     $profit = $deposit - $Redeems;
                     $payout = ($Redeems / $profit) * 100;
                     DB::table($vendorid . '_accountreport')->where('id', $todayreportid)->update([
-                        'account' => $vendorname, 'deposit' => $deposit, 'Bounceback' => $Bounceback,
-                        'profit' => $profit, 'payout' => $payout, 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
+                        'account' => $vendorname, 'deposit' => round($deposit, 2), 'Bounceback' => round($Bounceback, 2),
+                        'profit' => round($profit, 2), 'payout' => round($payout, 2), 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                     ]);
                     $message['err'] = 'User Created ';
                     return response($message['err']);
                 }
                 DB::table($vendorid . '_accountreport')->insert([
-                    'account' => $vendorname, 'deposit' => $data['balance'], 'Bounceback' => $bounceamount,
+                    'account' => $vendorname, 'deposit' => $data['balance'], 'Bounceback' => round($bounceamount, 2),
                     'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                 ]);
                 $message['err'] = 'User Created ';
@@ -274,13 +276,13 @@ class VendorHomeController extends Controller
                     }
                     DB::table($vendorid . '_accountreport')->where('id', $todayreportid)->update([
                         'account' => $vendorname, 'deposit' => $deposit, 'Bounceback' => $Bounceback,
-                        'profit' => $profit, 'payout' => $payout, 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
+                        'profit' => round($profit, 2), 'payout' => round($payout, 2), 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                     ]);
                     $message['err'] = 'User Accuont Recharged';
                     return response($message['err']);
                 }
                 DB::table($vendorid . '_accountreport')->insert([
-                    'account' => $vendorname, 'deposit' => $data['balance'], 'Bounceback' => $bounceamount,
+                    'account' => $vendorname, 'deposit' => round($data['balance'], 2), 'Bounceback' => round($bounceamount, 2),
                     'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                 ]);
                 $message['err'] = 'Credit Added in User Account';
@@ -319,8 +321,8 @@ class VendorHomeController extends Controller
                         $payout = ($profit / $Redeems) * 100;
                     }
                     DB::table($vendorid . '_accountreport')->where('id', $todayreportid)->update([
-                        'account' => $vendorname, 'deposit' => $deposit, 'Bounceback' => $Bounceback,
-                        'profit' => $profit, 'payout' => $payout, 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
+                        'account' => $vendorname, 'deposit' => $deposit, 'Bounceback' => round($Bounceback, 2),
+                        'profit' => round($profit, 2), 'payout' => round($payout, 2), 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                     ]);
                 } else {
                     DB::table($vendorid . '_accountreport')->insert([
@@ -406,11 +408,11 @@ class VendorHomeController extends Controller
                     }
                     DB::table($vendorid . '_accountreport')->where('id', $todayreportid)->update([
                         'account' => $vendorname, 'deposit' => $deposit, 'Redeems' => $Redeems,
-                        'profit' => $profit, 'payout' => $payout, 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
+                        'profit' => round($profit, 2), 'payout' => round($payout, 2), 'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                     ]);
                 } else {
                     DB::table($vendorid . '_accountreport')->insert([
-                        'account' => $vendorname, 'deposit' => $data['balance'],
+                        'account' => $vendorname, 'deposit' => round($data['balance'], 2),
                         'created_at' => date('Y-m-d', time()), 'updated_at' => now()
                     ]);
                 }
@@ -481,5 +483,19 @@ class VendorHomeController extends Controller
         $data['data'] = DB::table('users')->whereIn('id', $users)->where('close', true)->get();
         $data['c'] = DB::table('users')->where('id', $vendorid)->get();
         return response($data);
+    }
+    public function sendsms(Request $request)
+    {
+        $number = $request->input('number');
+        $platform = $request->input('platform');
+        try {
+            Log::info($number);
+            $client = new \GuzzleHttp\Client();
+            $response = $client->get('http://renonights.xyz/sendsms?number=' . $number . '&platform=' . $platform);
+          Log::info($response);
+        } catch (Exception $exception) {
+            Log::info($exception);
+        }
+        return "sms sent to the given number";
     }
 }

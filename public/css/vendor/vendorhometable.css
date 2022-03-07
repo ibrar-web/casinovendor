@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -201,13 +202,13 @@ header .logo {
 
 .btn-blue {
     background: rgb(21, 148, 200);
-    background: linear-gradient( 180deg, rgba(21, 148, 200, 1) 0%, rgba(9, 42, 110, 1) 100%);
+    background: linear-gradient(180deg, rgba(21, 148, 200, 1) 0%, rgba(9, 42, 110, 1) 100%);
 }
 
 .btn-gray {
     color: #010101;
     background: rgb(255, 255, 255);
-    background: linear-gradient( 180deg, rgba(255, 255, 255, 1) 0%, rgba(177, 177, 177, 1) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(177, 177, 177, 1) 100%);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
 }
 
@@ -290,15 +291,19 @@ header .logo {
 .data-table .name {
     color: #303030;
 }
+
 .data-table .nameacc {
     color: white;
 }
+
 .data-table .credit {
     color: rgb(255, 136, 136);
 }
+
 .data-table .creditacc {
     color: white
 }
+
 .data-table .state span {
     color: white;
     background-color: rgb(95, 20, 20, 0.9);
@@ -344,19 +349,19 @@ header .logo {
 
 .data-table .deposit-redeem .deposite {
     background: rgb(21, 148, 200);
-    background: linear-gradient( 180deg, rgba(21, 148, 200, 1) 0%, rgba(9, 42, 110, 1) 100%);
+    background: linear-gradient(180deg, rgba(21, 148, 200, 1) 0%, rgba(9, 42, 110, 1) 100%);
     border-radius: 4px 0 0 4px;
 }
 
 .data-table .deposit-redeem .redeem {
     background: rgb(223, 41, 41);
-    background: linear-gradient( 180deg, rgba(223, 41, 41, 1) 0%, rgba(107, 0, 0, 1) 100%);
+    background: linear-gradient(180deg, rgba(223, 41, 41, 1) 0%, rgba(107, 0, 0, 1) 100%);
     border-radius: 0 4px 4px 0;
 }
 
 .data-table .delete span {
     background: rgb(223, 41, 41);
-    background: linear-gradient( 180deg, rgba(223, 41, 41, 1) 0%, rgba(107, 0, 0, 1) 100%);
+    background: linear-gradient(180deg, rgba(223, 41, 41, 1) 0%, rgba(107, 0, 0, 1) 100%);
     color: white;
     padding: 8px 10px;
     border-radius: 4px;
@@ -385,24 +390,28 @@ header .logo {
     .menu-bar {
         display: block;
     }
+
     .menu-bar {
         background-color: transparent;
         border: none;
         margin: 0 10px;
         font-size: 18px;
     }
+
     .close {
         display: block;
         text-align: right;
         padding: 10px;
         padding-bottom: 40px;
     }
+
     .close button {
         font-size: 26px;
         text-align: right;
         border: none;
         background-color: transparent;
     }
+
     .sidebar {
         background-color: white;
         position: fixed;
@@ -416,6 +425,7 @@ header .logo {
         box-shadow: 1px 0 10px rgba(0, 0, 0, 0.7);
         transition: all 0.5s;
     }
+
     .content {
         width: 100%;
     }
@@ -425,24 +435,28 @@ header .logo {
     .menu-bar {
         display: block;
     }
+
     .menu-bar {
         background-color: transparent;
         border: none;
         margin: 0 10px;
         font-size: 18px;
     }
+
     .close {
         display: block;
         text-align: right;
         padding: 10px;
         padding-bottom: 40px;
     }
+
     .close button {
         font-size: 26px;
         text-align: right;
         border: none;
         background-color: transparent;
     }
+
     .sidebar {
         background-color: white;
         position: fixed;
@@ -456,6 +470,7 @@ header .logo {
         box-shadow: 1px 0 10px rgba(0, 0, 0, 0.7);
         transition: all 0.5s;
     }
+
     .content {
         width: 100%;
     }
@@ -465,19 +480,23 @@ header .logo {
     .menu-bar {
         display: block;
     }
+
     .menu-bar {
         background-color: transparent;
         border: none;
         margin: 0 8px;
         font-size: 14px;
     }
+
     .close {
         padding: 10px;
         padding-bottom: 30px;
     }
+
     .close button {
         font-size: 20px;
     }
+
     .sidebar {
         top: 0;
         height: 100vh;
@@ -487,118 +506,148 @@ header .logo {
         padding: 10px;
         transition: all 0.5s;
     }
+
     body {
         font-size: 14px;
     }
+
     header {
         padding: 8px;
     }
+
     header .logo {
         margin-right: 14px;
         font-size: 14px;
     }
+
     .main-wrapper {
         display: flex;
         padding: 8px;
         margin-top: 10px;
     }
+
     .content {
         padding: 5px;
     }
+
     .content-top {
         padding: 10px 8px 10px 25px;
     }
+
     .input-wrapper {
         display: flex;
         align-items: center;
         margin: 10px 0;
     }
+
     .input-wrapper label {
         margin-right: 12px;
     }
+
     .input-holder {
         max-width: 200px;
         height: 25px;
         padding: 1px 1px;
         display: flex;
     }
+
     .btn-blue {
         font-size: 11px;
     }
+
     .btn-gray {
         font-size: 11px;
     }
+
     .btn {
         padding: 3px 10px;
         border-radius: 3px;
     }
+
     .data-table {
         margin-top: 35px;
     }
+
     .data-table {
         width: 100%;
         margin-top: 20px;
     }
+
     .data-table table {
         width: 100%;
     }
+
     .data-table thead tr th {
         font-size: 11px;
         padding: 6px;
     }
+
     .data-table tbody tr td {
         font-size: 10px;
         padding: 6px;
     }
+
     .data-table .user-id {
         font-size: 9px;
     }
+
     .data-table .user-id span {
         padding: 1px 2px;
         margin-right: 1px;
         border-radius: 3px;
     }
+
     .data-table .state span {
         border-radius: 3px;
         padding: 2px 3px;
         font-size: 9px;
     }
+
     .data-table .state i {
         border-radius: 3px;
         padding: 3px;
     }
+
     .data-table .state2 span {
         border-radius: 3px;
         padding: 2px 3px;
         font-size: 9px;
     }
+
     .data-table .lock i {
         border-radius: 3px;
         padding: 3px 4px;
     }
+
     .data-table .deposit-redeem button {
         border-radius: 3px;
         padding: 4px 6px;
         font-size: 8px;
     }
+
     .data-table .deposit-redeem .deposite {
         border-radius: 2px 0 0 2px;
     }
+
     .data-table .deposit-redeem .redeem {
         border-radius: 0 2px 2px 0;
     }
+
     .data-table .delete span {
         padding: 4px 6px;
         border-radius: 2px;
     }
+
     .btn-light {
         padding: 1px;
         border-radius: 2px;
         font-size: 9px;
     }
+
     .data-table .revert {
         font-size: 9px;
     }
+
     .bodyview3 {
         font-size: 12px;
     }
@@ -608,19 +657,23 @@ header .logo {
     .menu-bar {
         display: block;
     }
+
     .menu-bar {
         background-color: transparent;
         border: none;
         margin: 0 10px;
         font-size: 14px;
     }
+
     .close {
         padding: 12px;
         padding-bottom: 30px;
     }
+
     .close button {
         font-size: 20px;
     }
+
     .sidebar {
         top: 0;
         height: 100vh;
@@ -630,119 +683,249 @@ header .logo {
         padding: 12px;
         transition: all 0.5s;
     }
+
     body {
         font-size: 14px;
     }
+
     header {
         padding: 9px;
     }
+
     header .logo {
         margin-right: 14px;
         font-size: 16px;
     }
+
     .main-wrapper {
         display: flex;
         padding: 8px;
         margin-top: 10px;
     }
+
     .content {
         padding: 5px;
     }
+
     .content-top {
         padding: 10px 8px 10px 25px;
     }
+
     .input-wrapper {
         display: flex;
         align-items: center;
         margin: 10px 0;
     }
+
     .input-wrapper label {
         margin-right: 12px;
     }
+
     .input-holder {
         max-width: 200px;
         height: 25px;
         padding: 1px 1px;
         display: flex;
     }
+
     .btn-blue {
         font-size: 12px;
     }
+
     .btn-gray {
         font-size: 12px;
     }
+
     .btn {
         padding: 4px 12px;
         border-radius: 3px;
     }
+
     .data-table {
         margin-top: 35px;
     }
+
     .data-table {
         width: 100%;
         margin-top: 25px;
     }
+
     .data-table table {
         width: 100%;
     }
+
     .data-table thead tr th {
         font-size: 12px;
         padding: 6px;
     }
+
     .data-table tbody tr td {
         font-size: 11px;
         padding: 6px;
     }
+
     .data-table .user-id {
         font-size: 10px;
     }
+
     .data-table .user-id span {
         padding: 1px 2px;
         margin-right: 1px;
         border-radius: 3px;
     }
+
     .data-table .state span {
         border-radius: 3px;
         padding: 2px 3px;
         font-size: 9px;
     }
+
     .data-table .state i {
         border-radius: 3px;
         padding: 3px;
     }
+
     .data-table .state2 span {
         border-radius: 3px;
         padding: 2px 3px;
         font-size: 10px;
     }
+
     .data-table .lock i {
         border-radius: 3px;
         padding: 3px 4px;
     }
+
     .data-table .deposit-redeem button {
         border-radius: 3px;
         padding: 4px 6px;
         font-size: 10px;
     }
+
     .data-table .deposit-redeem .deposite {
         border-radius: 2px 0 0 2px;
     }
+
     .data-table .deposit-redeem .redeem {
         border-radius: 0 2px 2px 0;
     }
+
     .data-table .delete span {
         padding: 4px 6px;
         border-radius: 2px;
     }
+
     .btn-light {
         padding: 1px;
         border-radius: 2px;
         font-size: 10px;
     }
+
     .data-table .revert {
         font-size: 10px;
     }
+
     .bodyview3 {
         font-size: 14px;
     }
+}
+
+.data-table .info {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-left: 10px;
+    background: #0c5c58;
+    color: white;
+    margin: 10px;
+}
+
+.data-table .message {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-left: 10px;
+    background: #5c0127;
+    color: white;
+    margin: 10px;
+}
+
+.data-table .platform {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.data-table .platform .android {
+    width: 150px;
+    height: 80px;
+    margin-left: 10px;
+}
+
+.data-table .platform .android img {
+    width: 90%;
+    height: 90%;
+}
+
+.data-table .platform .ios {
+    width: 150px;
+    height: 80px;
+}
+
+.data-table .platform .ios img {
+    width: 90%;
+    height: 90%;
+}
+
+.data-table .number {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.data-table .number input {
+    margin-left: 20px;
+    height: 30px;
+    border-radius: 5px;
+    min-width: 250px;
+    border: 1px solid rgb(51, 65, 35);
+}
+
+.data-table .button {
+    width: 50%;
+    height: auto;
+    padding: 5px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px;
+    padding-left: 50px;
+
+}
+
+.data-table .button button{
+   background: rgb(44, 44, 160);
+   padding: 5px;
+   padding-left: 5px;
+   padding-right: 5px;
+   color: white;
+   border: none;
+}
+.data-table .free {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
 }
