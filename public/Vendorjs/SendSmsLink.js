@@ -10,7 +10,7 @@ app.controller("SendSmsLink", function($scope, $filter, $http, $interval) {
                 "left": "-100%"
             }
         } else {
-            console.log('remove');
+            //console.log('remove');
             $scope.myStyle = {
                 "left": "0%"
             }

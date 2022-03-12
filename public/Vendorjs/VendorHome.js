@@ -94,8 +94,8 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         // if ($scope.sort.sortingOrder !== '') {
         //     $scope.filteredItems = $filter('orderBy')($scope.filteredItems, $scope.sort.sortingOrder, $scope.sort.reverse);
         // }
-        console.log($scope.items)
-        console.log($scope.filteredItems);
+        // console.log($scope.items)
+        // console.log($scope.filteredItems);
         $scope.currentPage = 0;
         // now group by pages
         $scope.groupToPages();
@@ -155,7 +155,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         $scope.registervendro();
     };
     $scope.registervendro = function() {
-        console.log($scope.bounce);
+        // console.log($scope.bounce);
         var PipelineData = {
             data: $scope.register,
             sequence: global_sequence,
@@ -206,8 +206,8 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
             function(response) {
                 if (response.data) {
                     $scope.histroy = response.data.data;
-                    console.log(response.data.name);
-                    console.log($scope.histroy);
+                    // console.log(response.data.name);
+                    // console.log($scope.histroy);
                 } else {
                     $scope.alertmessage =
                         "Proper Data Not Obtained. Check Server.";
@@ -238,7 +238,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
                 "left": "-100%"
             }
         } else {
-            console.log('remove');
+            // console.log('remove');
             $scope.myStyle = {
                 "left": "0%"
             }

@@ -1,14 +1,14 @@
-app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
+app.controller("AccountDisputes", function ($scope, $filter, $http, $interval) {
     $scope.number;
     var sideBar = document.querySelector(".sidebar");
     sideBar.classList.remove("active");
     $scope.uname = uname;
-    var initload = function() {
+    var initload = function () {
         var PipelineData = {};
         $http
             .post("./vendor/vendordisputes/init", JSON.stringify(PipelineData))
             .then(
-                function(response) {
+                function (response) {
                     if (response.data) {
                         $scope.items = response.data.data;
                         data = $scope.items;
@@ -24,7 +24,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
                         };
                     }
                 },
-                function(response) {
+                function (response) {
                     $scope.alertmessage = "Server Error!!!.";
                     $scope.alertboxjs = {
                         display: "block",
@@ -72,12 +72,12 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
     /////////////////////// Table Functions /////////////////////////////////
 
     ////////
-    $scope.myFunc = function() {
+    $scope.myFunc = function () {
         $scope.itemsPerPage = $scope.itemsPerPage;
         $scope.search();
     };
     ////////
-    var searchMatch = function(haystack, needle) {
+    var searchMatch = function (haystack, needle) {
         if (!needle) {
             return true;
         }
@@ -85,8 +85,8 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
     };
 
     ////////
-    $scope.search = function() {
-        $scope.filteredItems = $filter("filter")($scope.items, function(item) {
+    $scope.search = function () {
+        $scope.filteredItems = $filter("filter")($scope.items, function (item) {
             for (var attr in item) {
                 if (searchMatch(item[attr], $scope.query)) return true;
             }
@@ -105,7 +105,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
         $scope.groupToPages();
     };
     ////////////
-    $scope.groupToPages = function() {
+    $scope.groupToPages = function () {
         $scope.pagedItems = [];
         for (var i = 0; i < $scope.filteredItems.length; i++) {
             if (i % $scope.itemsPerPage === 0) {
@@ -120,7 +120,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
         }
     };
     ////////////
-    $scope.range = function(size, start, end) {
+    $scope.range = function (size, start, end) {
         var ret = [];
         if (size < end) {
             end = size;
@@ -133,22 +133,22 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
     };
 
     ////////////
-    $scope.prevPage = function() {
+    $scope.prevPage = function () {
         if ($scope.currentPage > 0) {
             $scope.currentPage--;
         }
     };
     ///////////////
-    $scope.nextPage = function() {
+    $scope.nextPage = function () {
         if ($scope.currentPage < $scope.pagedItems.length - 1) {
             $scope.currentPage++;
         }
     };
     //////////////
-    $scope.setPage = function() {
+    $scope.setPage = function () {
         $scope.currentPage = this.n;
     };
-    $scope.crud = function(value, type) {
+    $scope.crud = function (value, type) {
         $scope.register.name = value.name;
         $scope.register.type = type;
         global_sequence = value.id;
@@ -163,7 +163,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
             $scope.register.name + $scope.number + s4() + s4();
         return null;
     };
-    $scope.vendorhistorycontrol = function(value) {
+    $scope.vendorhistorycontrol = function (value) {
         if ($scope.vendorregister6) {
             $scope.vendorregister6 = false;
         } else {
@@ -171,7 +171,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
             $scope.vendorhistory(value);
         }
     };
-    $scope.toggleMenu = function() {
+    $scope.toggleMenu = function () {
 
         if (sideBar.classList.contains('active')) {
             sideBar.classList.remove("active");
@@ -179,7 +179,7 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
                 "left": "-100%"
             }
         } else {
-            console.log('remove');
+            //console.log('remove');
             $scope.myStyle = {
                 "left": "0%"
             }
@@ -187,23 +187,23 @@ app.controller("AccountDisputes", function($scope, $filter, $http, $interval) {
         }
 
     }
-    $scope.filterdata = function() {
+    $scope.filterdata = function () {
         $scope.items = [];
         let from = $scope.from;
         let till = $scope.till;
         for (var i = 0; i < data.length; i++) {
             let date1 = new Date(`${data[i]['created_at']}`);
             date1.setHours(0, 0, 0, 0);
-            console.log($scope.from.setHours(0, 0, 0, 0));
+            // console.log($scope.from.setHours(0, 0, 0, 0));
             if (date1.getTime() >= from.getTime() && date1.getTime() <= till.getTime()) {
                 $scope.items.push(data[i]);
             }
         }
-        console.log($scope.items);
-        console.log('$scope.items');
+        // console.log($scope.items);
+        //console.log('$scope.items');
         $scope.search();
     }
-    $scope.reset = function() {
+    $scope.reset = function () {
 
         $scope.items = data;
         $scope.search();

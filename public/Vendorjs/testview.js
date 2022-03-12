@@ -216,8 +216,8 @@ app.controller("testview", function($scope, $filter, $http, $interval) {
             function(response) {
                 if (response.data) {
                     $scope.histroy = response.data.data;
-                    console.log(response.data.name);
-                    console.log($scope.histroy);
+                    // console.log(response.data.name);
+                    // console.log($scope.histroy);
                 } else {
                     $scope.alertmessage =
                         "Proper Data Not Obtained. Check Server.";

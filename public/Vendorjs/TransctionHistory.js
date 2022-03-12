@@ -149,7 +149,7 @@ app.controller("transctionhistory", function($scope, $filter, $http, $interval) 
                 "left": "-100%"
             }
         } else {
-            console.log('remove');
+            // console.log('remove');
             $scope.myStyle = {
                 "left": "0%"
             }
@@ -164,13 +164,13 @@ app.controller("transctionhistory", function($scope, $filter, $http, $interval) 
         for (var i = 0; i < data.length; i++) {
             let date1 = new Date(`${data[i]['created_at']}`);
             date1.setHours(0, 0, 0, 0);
-            console.log($scope.from.setHours(0, 0, 0, 0));
+            // console.log($scope.from.setHours(0, 0, 0, 0));
             if (date1.getTime() >= from.getTime() && date1.getTime() <= till.getTime()) {
                 $scope.items.push(data[i]);
             }
         }
-        console.log($scope.items);
-        console.log('$scope.items');
+        // console.log($scope.items);
+        // console.log('$scope.items');
         $scope.search();
     }
     $scope.reset = function() {
