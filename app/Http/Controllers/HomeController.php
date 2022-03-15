@@ -25,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-       return view('VendorHome');
+      $role=DB::table('users')->where('id',Auth::user()->id)->pluck('role')[0];
+      if($role=='vendor'){
+        return view('VendorHome');
+      }else{
+        Auth::logout();
+        return abort(500,'user ');
+      }
     }
 }
