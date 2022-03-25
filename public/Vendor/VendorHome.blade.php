@@ -336,10 +336,12 @@
                 </button>
             </div>
             <div class="modal-body modal-body4">
-                <div class="inputs" style="height:100px">
-                    <span style="color: green;"><%register.name%></span>
+                <div class="inputs">
+                    <span style="color: green;font-size:16px">User:<%register.name%></span>
                     <div>
                         <label for="name">Add <%register.type%></label>
+                    </div>
+                    <div>
                         <input type="number" placeholder="Add User Balance" ng-model="register.balance">
                     </div>
                     <div class="input-wrapper checkbox">
@@ -367,10 +369,12 @@
                 </button>
             </div>
             <div class="modal-body modal-body4">
-                <div class="inputs" style="height:100px">
-                    <span style="color: green;"><%register.name%></span>
+                <div class="inputs">
+                    <span style="color: green;">User:<%register.name%></span>
                     <div>
                         <label for="name">Amount</label>
+                    </div>
+                    <div>
                         <input type="number" placeholder="Enter Withdrawal Amount" ng-model="register.balance">
                     </div>
                 </div>

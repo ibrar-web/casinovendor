@@ -13,7 +13,6 @@
 body {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
-    color: #010101;
     position: relative;
     overflow: auto;
 }
@@ -289,7 +288,7 @@ header .logo {
 }
 
 .data-table .name {
-    color: #303030;
+    color: white;
 }
 
 .data-table .nameacc {

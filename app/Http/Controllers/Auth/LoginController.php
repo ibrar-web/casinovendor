@@ -73,7 +73,7 @@ class LoginController extends Controller
         } else {
             Log::info('not matched');
             return redirect()->back()
-                ->with('error', 'Email-Address And Password Are Wrong.');
+                ->withErrors(['error'=>'Email-Address or Password Are Wrong.']);
         }
     }
 }

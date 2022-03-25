@@ -61,6 +61,10 @@ class VendorHomeController extends Controller
                         $message['err'] = 'Please Recharge your Account';
                         return response($message['err']);
                     }
+                    if ($data['balance'] == 0 || $data['balance'] < 0) {
+                        $message['err'] = 'User Created, Please enter proper amount';
+                        return response($message['err']);
+                    }
                     $previousvb = $vendoramount;
                     $vendoramount = $vendoramount - $data['balance'];
                     $user = DB::table('users')->pluck('id');
@@ -188,7 +192,6 @@ class VendorHomeController extends Controller
                     DB::table('users')->where('id', $sequence)->update([
                         'close' => true, 'dispute' => true
                     ]);
-
                     $message['err'] = 'User account added into disputes';
                     return response($message['err']);
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
@@ -213,6 +216,10 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'credit':
+                    if ($data['balance'] == 0 || $data['balance'] < 0) {
+                        $message['err'] = 'Please enter proper amount';
+                        return response($message['err']);
+                    }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
                     $name = DB::table('users')->where('id', $sequence)->pluck('name')[0];
@@ -298,7 +305,7 @@ class VendorHomeController extends Controller
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
                     $name = DB::table('users')->where('id', $sequence)->pluck('name')[0];
                     if (!DB::table('users')->where('id', $sequence)->pluck('revert')[0]) {
-                        $message['err'] = 'User has not recharged his account';
+                        $message['err'] = 'User has not recharged his account or User Played game';
                         return response($message);
                     }
                     $amount = DB::table('users')->where('id', $sequence)->pluck('amount')[0];
@@ -352,6 +359,10 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'redeem':
+                    if ($data['balance'] == 0 || $data['balance'] < 0) {
+                        $message['err'] = 'Please enter proper amount';
+                        return response($message['err']);
+                    }
                     $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
                     $redeem = DB::table('users')->where('id', $sequence)->pluck('reward')[0];
                     if ($data['balance'] > ($bounceback + $redeem)) {
@@ -440,7 +451,7 @@ class VendorHomeController extends Controller
             Log::info($exception);
         }
 
-        return 'dsasd';
+        return 'Please Try again, missing params';
     }
 
     public function usershistory(Request $request)

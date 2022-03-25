@@ -21,6 +21,7 @@
 
 .modal-footer {
     height: 40px;
+    background: white;
 }
 
 .modal-footer button {
@@ -32,7 +33,7 @@
 }
 
 .modal-body1 .inputs {
-    height: 280px;
+    height: auto;
     width: 100%;
     color: black;
     display: flex;
@@ -46,20 +47,20 @@
     height: 40px;
     display: flex;
     align-items: center;
-    margin: 10px
+    margin:5px
 }
 
 .modal-body1 .inputs label {
     font-size: 15px;
     text-align: left;
-    width: 70px
+  
 }
 
 .modal-body1 .inputs input {
     font-size: 15px;
     height: 35px;
     width: 250px;
-    margin: 10px;
+    margin:5px;
 }
 
 .modal-body1 .inputs button {
@@ -89,18 +90,17 @@
 
 .modal-body2 .inputs label {
     font-size: 15px;
-    width: 70px
 }
 
 .modal-body2 .inputs input {
     font-size: 15px;
     height: 35px;
     width: 250px;
-    margin: 10px;
+    margin: 5px;
 }
 
 .modal-body3 .inputs {
-    height: 100px;
+    height: auto;
     width: 100%;
     color: black;
     display: flex;
@@ -118,18 +118,20 @@
 
 .modal-body3 .inputs label {
     font-size: 15px;
-    width: 70px
 }
 
 .modal-body3 .inputs input {
     font-size: 15px;
     height: 35px;
     width: 250px;
-    margin: 10px;
+    margin: 5px;
 }
-
+.modal-body {
+    height: auto;
+    padding: 5px;
+}
 .modal-body4 .inputs {
-    height: 50px;
+    height: auto;
     width: 100%;
     color: black;
     display: flex;
@@ -143,19 +145,18 @@
     height: 40px;
     display: flex;
     align-items: center;
-    margin: 10px
+    margin: 5px
 }
 
 .modal-body4 .inputs label {
     font-size: 15px;
-    width: 70px
 }
 
 .modal-body4 .inputs input {
     font-size: 15px;
     height: 35px;
     width: 250px;
-    margin: 10px;
+    margin: 5px;
 }
 
 .modal-content6 {
