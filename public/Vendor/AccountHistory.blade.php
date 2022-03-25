@@ -141,7 +141,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="(key,item) in pagedItems[currentPage]| filter:test" ng-class="{1:'bet', 2:'reward', 3:'cancel',4:'deposit',5:'bonus',6:'redeem'}[item.color]">
+                    <tr ng-repeat="(key,item) in pagedItems[currentPage]| filter:test" ng-class="{1:'bet', 2:'reward', 3:'cancel',4:'deposit',5:'bonus',6:'redeem','7':'wintod'}[item.color]">
                         <th class="user-id">
                             <span><%item.account%></span>
                         </th>
