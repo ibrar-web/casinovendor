@@ -359,7 +359,7 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'redeem':
-                    if ($data['balance'] == 0 || $data['balance'] < 0) {
+                    if ($data['balance'] == 0 || $data['balance'] < 0 || $data['balance'] < 0.9999999999999) {
                         $message['err'] = 'Please enter proper amount';
                         return response($message['err']);
                     }
@@ -377,7 +377,7 @@ class VendorHomeController extends Controller
                         $bouncebackafter = $bounceback - $data['balance'];
                         if ($bouncebackafter > 0) {
                             DB::table('users')->where('id', $sequence)->update(
-                                ['bounceback' => $bounceback - $data['balance'], 'reward' => $redeem - $data['balance']],
+                                ['bounceback' => $bounceback - $data['balance'], 'reward' =>round(( $redeem - $data['balance']),2)],
                             );
                         } else {
                             DB::table('users')->where('id', $sequence)->update(
@@ -387,7 +387,7 @@ class VendorHomeController extends Controller
                         }
                         ///only use from deposit redeem and revert and games of user
                         DB::table($vendorid . '_accounthistory')->insert([
-                            'account' => $username, 'amount' => $redeemamount, 'description' => 'bouncereturn', 'name' => $name,
+                            'account' => $username, 'amount' => $redeemamount, 'description' => 'bouncereturn by vendor', 'name' => $name,
                             'frombalance' => $bounceback, 'bounce' => $redeemamount, 'tobalance' => $bouncebackafter, 'created_at' => now(), 'updated_at' => now(), 'color' => 5
                         ]);
                         $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
@@ -440,7 +440,7 @@ class VendorHomeController extends Controller
                     );
                     ///only use from deposit redeem and revert and games of user
                     DB::table($vendorid . '_accounthistory')->insert([
-                        'account' => $username, 'amount' => $redeemamount, 'description' => 'redeem', 'name' => $name,
+                        'account' => $username, 'amount' => $redeemamount, 'description' => 'redeem by vendor', 'name' => $name,
                         'frombalance' => $previous, 'bounce' => '', 'tobalance' => $reward, 'created_at' => now(), 'updated_at' => now(), 'color' => 6
                     ]);
                     $message['err'] = 'User Withdrawl Redeem';

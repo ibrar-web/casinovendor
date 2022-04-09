@@ -156,8 +156,8 @@
                             <span ng-click="copyToClipboard(item.username);"><%item.username%></span>
                         </td>
                         <!--<i class="fas fa-copy"></i>-->
-                        <td class="name"><%item.name%></td>
-                        <td class="name"><%item.created_at%></td>
+                        <td class="nameb"><%item.name%></td>
+                        <td class="nameb"><%item.created_at%></td>
                         <td class="credit"><span><%item.amount%></span>/<span><%item.reward%></span>
                         </td>
                         <td ng-class="{Online:'state2', Offline:'state'}[item.status]"><span><%item.status%></span></td>

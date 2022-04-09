@@ -290,7 +290,9 @@ header .logo {
 .data-table .name {
     color: white;
 }
-
+.data-table .nameb {
+    color: black;
+}
 .data-table .nameacc {
     color: white;
 }
