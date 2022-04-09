@@ -143,24 +143,24 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="(key,item) in pagedItems[currentPage] | filter:test">
-                        <th class="name"><%item.created_at%></th>
+                        <th class="nameb"><%item.created_at%></th>
                         <th class="user-id">
                             <span><%item.account%></span>
                         </th>
-                        <th class="name"><%item.deposit%></th>
+                        <th class="nameb"><%item.deposit%></th>
                         <th class="credit"><%item.Bounceback%></th>
-                        <th class="name"><%item.Redeems%></th>
-                        <th class="name"><%item.profit%></th>
+                        <th class="nameb"><%item.Redeems%></th>
+                        <th class="nameb"><%item.profit%></th>
                         <th class="names"><%item.payout%></th>
                     </tr>
                     <tr>
-                        <th class="name">Total</th>
+                        <th class="nameb">Total</th>
                         <th class="user-id">
                         </th>
-                        <th class="name"><%deposit%></th>
+                        <th class="nameb"><%deposit%></th>
                         <th class="credit"><%Bounceback%></th>
-                        <th class="name"><%Redeems%></th>
-                        <th class="name"><%profit%></th>
+                        <th class="nameb"><%Redeems%></th>
+                        <th class="nameb"><%profit%></th>
                         <th class="names"><%payout%></th>
                     </tr>
                 </tbody>

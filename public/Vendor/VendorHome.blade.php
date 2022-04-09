@@ -196,7 +196,7 @@
                             <span ng-click="copyToClipboard(item.username);"><%item.username%></span>
                         </div>
                         <!--<i class="fas fa-copy"></i>-->
-                        <div class="name"><%item.name%></div>
+                        <div class="nameb"><%item.name%></div>
                         <div ng-class="{Online:'state2', Offline:'state'}[item.status]"><span><%item.status%></span></div>
                         <div class="credit"><span><%item.amount%></span>/<span><%item.reward%></span></div>
                         <div><i class="fas fa-ellipsis-v" ng-model="item.remember_token" ng-click="item.remember_token?item.remember_token=false:item.remember_token=true"></i></div>
