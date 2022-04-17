@@ -365,8 +365,10 @@ class VendorHomeController extends Controller
                     }
                     $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
                     $redeem = DB::table('users')->where('id', $sequence)->pluck('reward')[0];
-                    if ($data['balance'] > ($bounceback + $redeem)) {
-                        $message['err'] = 'User does not have enough redeem and bonus';
+                    // Log::info($redeem);
+                    // Log::info($data['balance']);
+                    if ($redeem < $data['balance']) {
+                        $message['err'] = 'User does not have enough redeem credit';
                         return response($message['err']);
                     }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
