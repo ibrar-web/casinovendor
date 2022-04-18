@@ -278,7 +278,6 @@ class VendorHomeController extends Controller
                         return (array)$value;
                     }, $todayreport);
                     if (count($todayreport) > 0) {
-                        Log::info('val');
                         $todayreportid = $todayreport[0]['id'];
                         $deposit = $todayreport[0]['deposit'] + $data['balance'];
                         $Bounceback = $todayreport[0]['Bounceback'] + $bounceamount;
