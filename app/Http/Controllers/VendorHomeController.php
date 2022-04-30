@@ -206,7 +206,7 @@ class VendorHomeController extends Controller
                     ///only use from deposit redeem and revert for vendor and user
                     DB::table($vendorid . '_accounthistory')->insert([
                         'account' => $username, 'amount' => $amount, 'description' => 'account delete',
-                        'frombalance' => $previousvb, 'tobalance' => $vendoramount, 'created_at' => now(), 'updated_at' => now()
+                        'frombalance' => $previousvb, 'tobalance' => $vendoramount, 'created_at' => now(), 'updated_at' => now(), 'color' => 8
                     ]);
                     $name = DB::table('users')->where('id', $sequence)->pluck('name')[0];
                     DB::table('users')->where('id', $sequence)->delete();
@@ -270,7 +270,7 @@ class VendorHomeController extends Controller
                     );
                     ///only use from deposit redeem and revert and games of user
                     DB::table($vendorid . '_accounthistory')->insert([
-                        'account' => $username, 'amount' => $data['balance'], 'description' => 'deposit', 'name' => $name,
+                        'account' => $username, 'amount' => $data['balance'], 'description' => 'deposit', 'name' => $name, 'color' => 4,
                         'frombalance' => $previous, 'bounce' => $bounceamount, 'tobalance' => $amount, 'created_at' => now(), 'updated_at' => now()
                     ]);
                     $todayreport = DB::table($vendorid . '_accountreport')->whereDate('created_at', '=', date('Y-m-d', time()))->get()->toArray();
@@ -360,6 +360,7 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'redeem':
+                    log::info('redeem');
                     if ($data['balance'] == 0 || $data['balance'] < 0 || $data['balance'] < 0.9999999999999) {
                         $message['err'] = 'Please enter proper amount';
                         return response($message['err']);
