@@ -402,13 +402,15 @@ class VendorHomeController extends Controller
                     if ($bounceback > 0) {
                         $redeemamount = $data['balance'];
                         $bouncebackafter = $bounceback - $data['balance'];
+                        //checking if still bounce exist
                         if ($bouncebackafter > 0) {
                             DB::table('users')->where('id', $sequence)->update(
                                 ['bounceback' => $bounceback - $data['balance'], 'reward' => round(($redeem - $data['balance']), 2), 'revert' => false],
                             );
                         } else {
+                            //if bounce do not exist
                             DB::table('users')->where('id', $sequence)->update(
-                                ['bounceback' => 0, 'revert' => false],
+                                ['bounceback' => 0, 'revert' => false, 'reward' => round(($redeem - $data['balance']), 2)],
                             );
                             $data['balance'] = abs($bouncebackafter);
                         }
