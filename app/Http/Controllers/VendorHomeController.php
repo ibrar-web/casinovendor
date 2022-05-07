@@ -390,6 +390,11 @@ class VendorHomeController extends Controller
                         return $message;
                     }
                     if ($data['cb'] == true) {
+                        if($bounceback>$redeem){
+                            $data['balance']=$redeem;
+                        }else{
+                            $data['balance']=$bounceback;
+                        }
                     }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
