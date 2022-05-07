@@ -183,6 +183,8 @@ app.controller("VendorHome", function ($scope, $filter, $http, $interval) {
                             type: "",
                             balance: "",
                             detail: "",
+                            status: "",
+                            cb: false,
                         };
                     }
                     initload();

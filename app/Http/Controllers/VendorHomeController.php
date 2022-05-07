@@ -254,20 +254,26 @@ class VendorHomeController extends Controller
                     //  $userbounceback = $userbounceback + $bounceamount;
                     ////keeeping the record of previous bonus
                     $userbounceback = $bounceamount;
-                    if ($request->input('bounce')) {
-                        DB::table('users')->where('id', $sequence)->update(
-                            [
-                                'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
-                                'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
-                            ]
-                        );
-                    } else {
-                        DB::table('users')->where('id', $sequence)->update(
-                            [
-                                'amount' => $amount, 'revertamount' => $data['balance'], 'revert' => true, 'lastbounce' => 0
-                            ]
-                        );
-                    }
+                    // if ($request->input('bounce')) {
+                    //     DB::table('users')->where('id', $sequence)->update(
+                    //         [
+                    //             'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
+                    //             'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
+                    //         ]
+                    //     );
+                    // } else {
+                    //     DB::table('users')->where('id', $sequence)->update(
+                    //         [
+                    //             'amount' => $amount, 'revertamount' => $data['balance'], 'revert' => true, 'lastbounce' => 0
+                    //         ]
+                    //     );
+                    // }
+                    DB::table('users')->where('id', $sequence)->update(
+                        [
+                            'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
+                            'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
+                        ]
+                    );
                     DB::table('users')->where('id', $vendorid)->update(
                         ['amount' => $vendoramount],
                     );
@@ -368,7 +374,7 @@ class VendorHomeController extends Controller
                         return response($message['err']);
                     }
                     $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
-                
+
                     $redeem = DB::table('users')->where('id', $sequence)->pluck('reward')[0];
                     // Log::info($redeem);
                     // Log::info($data['balance']);
@@ -377,11 +383,13 @@ class VendorHomeController extends Controller
                         return response($message['err']);
                     }
                     //cb is clear bonus
-                    if ($bounceback > 0 && $data['cb']==false) {
+                    if ($bounceback > 0 && $data['cb'] == false) {
                         Log::info($request->all());
                         $message['err'] = 'User has bonus amount ' . $bounceback;
                         $message['cb'] = true;
                         return $message;
+                    }
+                    if ($data['cb'] == true) {
                     }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
@@ -391,11 +399,11 @@ class VendorHomeController extends Controller
                         $bouncebackafter = $bounceback - $data['balance'];
                         if ($bouncebackafter > 0) {
                             DB::table('users')->where('id', $sequence)->update(
-                                ['bounceback' => $bounceback - $data['balance'], 'reward' => round(($redeem - $data['balance']), 2)],
+                                ['bounceback' => $bounceback - $data['balance'], 'reward' => round(($redeem - $data['balance']), 2), 'revert' => false],
                             );
                         } else {
                             DB::table('users')->where('id', $sequence)->update(
-                                ['bounceback' => 0],
+                                ['bounceback' => 0, 'revert' => false],
                             );
                             $data['balance'] = abs($bouncebackafter);
                         }
@@ -447,7 +455,7 @@ class VendorHomeController extends Controller
                         ]);
                     }
                     DB::table('users')->where('id', $sequence)->update(
-                        ['reward' => $reward],
+                        ['reward' => $reward, 'revert' => false],
                     );
                     DB::table('users')->where('id', $vendorid)->update(
                         ['reward' => $vendorreward, 'amount' => $vendoramount + $redeemamount],
