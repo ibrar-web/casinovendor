@@ -272,6 +272,13 @@ header .logo {
     padding: 8px;
 }
 
+.sddsdaas {
+    background: #2693b8;
+    color: aliceblue;
+    border: none;
+    padding: 5px;
+}
+
 .data-table .user-id span {
     padding: 1px 4px;
     display: inline-block;
@@ -290,9 +297,11 @@ header .logo {
 .data-table .name {
     color: white;
 }
+
 .data-table .nameb {
     color: black;
 }
+
 .data-table .nameacc {
     color: white;
 }
@@ -913,14 +922,15 @@ header .logo {
 
 }
 
-.data-table .button button{
-   background: rgb(44, 44, 160);
-   padding: 5px;
-   padding-left: 5px;
-   padding-right: 5px;
-   color: white;
-   border: none;
+.data-table .button button {
+    background: rgb(44, 44, 160);
+    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    border: none;
 }
+
 .data-table .free {
     width: 100%;
     height: auto;

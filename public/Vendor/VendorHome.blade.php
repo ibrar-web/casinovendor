@@ -76,7 +76,10 @@
         </div>
     </div>
     <div class="content">
-        <div class="message" style="background: lightblue;color:red;font-size:20px;"><b><%alertmessage%></b></div>
+        <div class="message" style="background: lightblue;color:red;font-size:16px;">
+            <b><%alertmessage%></b></br>
+            <button ng-if="cb" ng-click="clb()" class="sddsdaas">clear</button>
+        </div>
         <div class="message">Create Account / <a href="#!accountreport">My Report</a></div>
         <div class="content-top shadow">
             <div class="input-wrapper">
@@ -368,6 +371,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body modal-body4">
                 <div class="inputs">
                     <span style="color: green;">User:<%register.name%></span>

@@ -216,7 +216,7 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'credit':
-                    if ($data['balance'] == 0 || $data['balance'] < 0) {
+                    if ($data['balance'] < 1) {
                         $message['err'] = 'Please enter proper amount';
                         return response($message['err']);
                     }
@@ -232,7 +232,7 @@ class VendorHomeController extends Controller
                     $bounceback = DB::table('users')->where('id', $vendorid)->pluck('bounceback')[0];
                     $userbounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
                     //giving daily bonus
-                    // if ($request->input('bounce')) {
+                    // if ($request->input('bounce')) {,
                     //     if (count($bouncebackdate) > 0) {
                     //         $message['err'] = 'User Already Availed Bonus';
                     //         return response($message['err']);
@@ -241,7 +241,7 @@ class VendorHomeController extends Controller
                     //     $bounceback = 0;
                     // }
                     //giving 100% bonus on every recharge 
-                    $bounceback=100;
+                    $bounceback = 100;
                     $amount = DB::table('users')->where('id', $sequence)->pluck('amount')[0];
                     $previous = $amount;
                     $previousvb = $vendoramount;
@@ -250,7 +250,10 @@ class VendorHomeController extends Controller
                     $bounceamount = $balance * ($bounceback / 100);
                     $amount = $amount + $data['balance'] + $bounceamount;
                     $bounceback = $bounceback + $bounceamount;
-                    $userbounceback = $userbounceback + $bounceamount;
+                    ////keeeping the record of previous and current bonus
+                    //  $userbounceback = $userbounceback + $bounceamount;
+                    ////keeeping the record of previous bonus
+                    $userbounceback = $bounceamount;
                     if ($request->input('bounce')) {
                         DB::table('users')->where('id', $sequence)->update(
                             [
@@ -360,18 +363,25 @@ class VendorHomeController extends Controller
                     return response($message['err']);
                     break;
                 case 'redeem':
-                    log::info('redeem');
                     if ($data['balance'] == 0 || $data['balance'] < 0 || $data['balance'] < 0.9999999999999) {
                         $message['err'] = 'Please enter proper amount';
                         return response($message['err']);
                     }
                     $bounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
+                
                     $redeem = DB::table('users')->where('id', $sequence)->pluck('reward')[0];
                     // Log::info($redeem);
                     // Log::info($data['balance']);
                     if ($redeem < $data['balance']) {
                         $message['err'] = 'User does not have enough redeem credit';
                         return response($message['err']);
+                    }
+                    //cb is clear bonus
+                    if ($bounceback > 0 && $data['cb']==false) {
+                        Log::info($request->all());
+                        $message['err'] = 'User has bonus amount ' . $bounceback;
+                        $message['cb'] = true;
+                        return $message;
                     }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
@@ -381,7 +391,7 @@ class VendorHomeController extends Controller
                         $bouncebackafter = $bounceback - $data['balance'];
                         if ($bouncebackafter > 0) {
                             DB::table('users')->where('id', $sequence)->update(
-                                ['bounceback' => $bounceback - $data['balance'], 'reward' =>round(( $redeem - $data['balance']),2)],
+                                ['bounceback' => $bounceback - $data['balance'], 'reward' => round(($redeem - $data['balance']), 2)],
                             );
                         } else {
                             DB::table('users')->where('id', $sequence)->update(

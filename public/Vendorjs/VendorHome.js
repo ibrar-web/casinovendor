@@ -1,16 +1,16 @@
-app.controller("VendorHome", function($scope, $filter, $http, $interval) {
+app.controller("VendorHome", function ($scope, $filter, $http, $interval) {
     $scope.number;
     $scope.uname = uname;
     $scope.bounce = false;
     var sideBar = document.querySelector(".sidebar");
     sideBar.classList.remove("active");
-    var initload = function() {
+    var initload = function () {
         $scope.$emit("SendUp", "1");
         var PipelineData = {};
         $http
             .post("./vendor/userslist/init", JSON.stringify(PipelineData))
             .then(
-                function(response) {
+                function (response) {
                     if (response.data) {
                         $scope.items = response.data.data;
                         $scope.number = response.data.sequence;
@@ -26,7 +26,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
                         };
                     }
                 },
-                function(response) {
+                function (response) {
                     $scope.alertmessage = "Server Error!!!.";
                     $scope.alertboxjs = {
                         display: "block",
@@ -63,17 +63,18 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         balance: "",
         detail: "",
         status: "",
+        cb: false,
     };
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////// Table Functions /////////////////////////////////
 
     ////////
-    $scope.myFunc = function() {
+    $scope.myFunc = function () {
         $scope.itemsPerPage = $scope.itemsPerPage;
         $scope.search();
     };
     ////////
-    var searchMatch = function(haystack, needle) {
+    var searchMatch = function (haystack, needle) {
         if (!needle) {
             return true;
         }
@@ -81,9 +82,9 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
     };
 
     ////////
-    $scope.search = function() {
+    $scope.search = function () {
 
-        $scope.filteredItems = $filter('filter')($scope.items, function(item) {
+        $scope.filteredItems = $filter('filter')($scope.items, function (item) {
             for (var attr in item) {
                 if (searchMatch(item[attr], $scope.query))
                     return true;
@@ -101,7 +102,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         $scope.groupToPages();
     };
     ////////////
-    $scope.groupToPages = function() {
+    $scope.groupToPages = function () {
         $scope.pagedItems = [];
         for (var i = 0; i < $scope.filteredItems.length; i++) {
             if (i % $scope.itemsPerPage === 0) {
@@ -117,7 +118,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         }
     };
     ////////////
-    $scope.range = function(size, start, end) {
+    $scope.range = function (size, start, end) {
         var ret = [];
         if (size < end) {
             end = size;
@@ -130,31 +131,32 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
     };
 
     ////////////
-    $scope.prevPage = function() {
+    $scope.prevPage = function () {
         if ($scope.currentPage > 0) {
             $scope.currentPage--;
         }
     };
     ///////////////
-    $scope.nextPage = function() {
+    $scope.nextPage = function () {
         if ($scope.currentPage < $scope.pagedItems.length - 1) {
             $scope.currentPage++;
         }
     };
     //////////////
-    $scope.setPage = function() {
+    $scope.setPage = function () {
         $scope.currentPage = this.n;
     };
-    $scope.crud = function(value, type) {
+    $scope.crud = function (value, type) {
         $scope.register.name = value.name;
         $scope.register.type = type;
         global_sequence = value.id;
     };
-    $scope.vendorhistorycontrol = function(value) {
+    $scope.vendorhistorycontrol = function (value) {
         $scope.register.type = value;
         $scope.registervendro();
     };
-    $scope.registervendro = function() {
+    $scope.cb = false;
+    $scope.registervendro = function () {
         // console.log($scope.bounce);
         var PipelineData = {
             data: $scope.register,
@@ -162,9 +164,27 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
             bounce: $scope.bounce,
         };
         $http.post("./vendor/usersregister", JSON.stringify(PipelineData)).then(
-            function(response) {
+            function (response) {
                 if (response.data) {
-                    $scope.alertmessage = response.data;
+                    // console.log('message', response.data.err);
+                    if (response.data.cb) {
+                        $scope.cb = true;
+                        $scope.alertmessage = response.data.err;
+                    }
+                    else {
+                        $scope.register.cb = false;
+                        $scope.cb=false;
+                        $scope.alertmessage = response.data;
+                        $scope.register = {
+                            name: "",
+                            username: "",
+                            email: "",
+                            password: "",
+                            type: "",
+                            balance: "",
+                            detail: "",
+                        };
+                    }
                     initload();
                 } else {
                     $scope.alertmessage =
@@ -175,17 +195,9 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
                         color: "white",
                     };
                 }
-                $scope.register = {
-                    name: "",
-                    username: "",
-                    email: "",
-                    password: "",
-                    type: "",
-                    balance: "",
-                    detail: "",
-                };
+             
             },
-            function(response) {
+            function (response) {
                 $scope.alertmessage = "Server Error!!!.";
                 $scope.alertboxjs = {
                     display: "block",
@@ -195,7 +207,12 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
             }
         );
     };
-    $scope.vendorhistory = function(value, type) {
+    $scope.clb = function () {
+        $scope.register.cb = true;
+        $scope.cb = false;
+        $scope.registervendro();
+    }
+    $scope.vendorhistory = function (value, type) {
         $scope.register.name = value.name;
         var PipelineData = {
             sequence: value.id,
@@ -203,7 +220,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         };
 
         $http.post("./vendor/userhistory", JSON.stringify(PipelineData)).then(
-            function(response) {
+            function (response) {
                 if (response.data) {
                     $scope.histroy = response.data.data;
                     // console.log(response.data.name);
@@ -218,7 +235,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
                     };
                 }
             },
-            function(response) {
+            function (response) {
                 $scope.alertmessage = "Server Error!!!.";
                 $scope.alertboxjs = {
                     display: "block",
@@ -230,7 +247,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
     };
 
 
-    $scope.toggleMenu = function() {
+    $scope.toggleMenu = function () {
 
         if (sideBar.classList.contains('active')) {
             sideBar.classList.remove("active");
@@ -246,7 +263,7 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         }
 
     }
-    $scope.copyToClipboard = function(name) {
+    $scope.copyToClipboard = function (name) {
         var copyElement = document.createElement("textarea");
         copyElement.style.position = 'fixed';
         copyElement.style.opacity = '0';
@@ -257,10 +274,10 @@ app.controller("VendorHome", function($scope, $filter, $http, $interval) {
         document.execCommand('copy');
         body.removeChild(copyElement);
     }
-    $scope.userhist = function(item) {
-            global_sequence = item.id
-        }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $scope.userhist = function (item) {
+        global_sequence = item.id
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $scope.search();
     initload();
 });
