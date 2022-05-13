@@ -260,26 +260,26 @@ class VendorHomeController extends Controller
                     //  $userbounceback = $userbounceback + $bounceamount;
                     ////keeeping the record of previous bonus
                     $userbounceback = $bounceamount;
-                    // if ($request->input('bounce')) {
-                    //     DB::table('users')->where('id', $sequence)->update(
-                    //         [
-                    //             'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
-                    //             'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
-                    //         ]
-                    //     );
-                    // } else {
-                    //     DB::table('users')->where('id', $sequence)->update(
-                    //         [
-                    //             'amount' => $amount, 'revertamount' => $data['balance'], 'revert' => true, 'lastbounce' => 0
-                    //         ]
-                    //     );
-                    // }
-                    DB::table('users')->where('id', $sequence)->update(
-                        [
-                            'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
-                            'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
-                        ]
-                    );
+                    if ($request->input('bounce')) {
+                        DB::table('users')->where('id', $sequence)->update(
+                            [
+                                'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
+                                'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
+                            ]
+                        );
+                    } else {
+                        DB::table('users')->where('id', $sequence)->update(
+                            [
+                                'amount' => $amount, 'revertamount' => $data['balance'], 'revert' => true, 'bouncebackdate' => date('Y-m-d', time()),
+                            ]
+                        );
+                    }
+                    // DB::table('users')->where('id', $sequence)->update(
+                    //     [
+                    //         'amount' => $amount, 'revertamount' => $data['balance'] + $bounceamount, 'bouncebackdate' => date('Y-m-d', time()),
+                    //         'bounceback' => $userbounceback, 'revert' => true, 'lastbounce' => $bounceamount
+                    //     ]
+                    // );
                     DB::table('users')->where('id', $vendorid)->update(
                         ['amount' => $vendoramount],
                     );
