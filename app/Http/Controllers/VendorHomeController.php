@@ -237,16 +237,17 @@ class VendorHomeController extends Controller
                     $bounceback = DB::table('users')->where('id', $vendorid)->pluck('bounceback')[0];
                     $userbounceback = DB::table('users')->where('id', $sequence)->pluck('bounceback')[0];
                     //giving daily bonus
-                    // if ($request->input('bounce')) {,
-                    //     if (count($bouncebackdate) > 0) {
-                    //         $message['err'] = 'User Already Availed Bonus';
-                    //         return response($message['err']);
-                    //     }
-                    // } else {
-                    //     $bounceback = 0;
-                    // }
+                    if ($request->input('bounce')) {
+                            $bounceback = 100;
+                        // if (count($bouncebackdate) > 0) {
+                        //     $message['err'] = 'User Already Availed Bonus';
+                        //     return response($message['err']);
+                        // }
+                    } else {
+                        $bounceback = 0;
+                    }
                     //giving 100% bonus on every recharge 
-                    $bounceback = 100;
+                
                     $amount = DB::table('users')->where('id', $sequence)->pluck('amount')[0];
                     $previous = $amount;
                     $previousvb = $vendoramount;
