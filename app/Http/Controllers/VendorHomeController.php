@@ -220,6 +220,11 @@ class VendorHomeController extends Controller
                         $message['err'] = 'Please enter proper amount';
                         return response($message['err']);
                     }
+                    $reward = DB::table('users')->where('id', $sequence)->pluck('reward')[0];
+                    if ($reward > 0) {
+                        $message['err'] = 'Please Convert your credit into playabkle amount';
+                        return response($message['err']);
+                    }
                     $username = DB::table('users')->where('id', $sequence)->pluck('username')[0];
                     $vendorname = DB::table('users')->where('id', $vendorid)->pluck('name')[0];
                     $name = DB::table('users')->where('id', $sequence)->pluck('name')[0];
